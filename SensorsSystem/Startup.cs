@@ -1,14 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using SensorsSystem.DataLayer.Contracts;
 using SensorsSystem.DataLayer.Implementations;
 using SensorsSystem.DataLayer.Models;
@@ -28,7 +22,7 @@ namespace SensorsSystem
         {
             services.AddControllers();
             services.AddScoped<IRepository<SpeedSensorData>, FileSystemRepository<SpeedSensorData>>();
-            services.AddScoped<IFileSystemManager, FileSystemManager>();
+            services.AddScoped<IFileSystemManager<SpeedSensorData>, FileSystemManager<SpeedSensorData>>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -39,8 +33,6 @@ namespace SensorsSystem
             }
 
             app.UseRouting();
-
-            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

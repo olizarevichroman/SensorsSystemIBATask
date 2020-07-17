@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 
 namespace SensorsSystem.DataLayer.Contracts
 {
-    public interface IFileReader
+    public interface IFileReader<out T>
     {
+        T GetNext();
+
+        IEnumerable<T> GetAll();
     }
 }

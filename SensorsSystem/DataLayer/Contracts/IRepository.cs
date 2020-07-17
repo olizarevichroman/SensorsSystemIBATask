@@ -9,7 +9,7 @@ namespace SensorsSystem.DataLayer.Contracts
     {
         Task<T> Get(object id);
 
-        Task<bool> Add(T instance);
+        Task Add(T instance);
 
         Task<T> Remove(object id);
 

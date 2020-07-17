@@ -8,16 +8,16 @@ namespace SensorsSystem.DataLayer.Implementations
 {
     public class FileSystemRepository<T> : IRepository<T> where T: class,  new()
     {
-        private readonly IFileSystemManager _fileSystemManager;
+        private readonly IFileSystemManager<T> _fileSystemManager;
 
-        public FileSystemRepository(IFileSystemManager fileSystemManager)
+        public FileSystemRepository(IFileSystemManager<T> fileSystemManager)
         {
             _fileSystemManager = fileSystemManager;
         }
 
-        public Task<bool> Add(T instance)
+        public Task Add(T item)
         {
-            throw new NotImplementedException();
+            return _fileSystemManager.Add(item);
         }
 
         public Task<T> Find(Expression<Func<T, bool>> condition)

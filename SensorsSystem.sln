@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SensorsSystem", "SensorsSystem\SensorsSystem.csproj", "{5DF4DE51-376F-430D-BC9D-9103E0764FFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SensorsSystem", "SensorsSystem\SensorsSystem.csproj", "{5DF4DE51-376F-430D-BC9D-9103E0764FFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SensordSystemTests", "SensordSystemTests\SensordSystemTests.csproj", "{6F53D975-F35E-48DF-B6E0-106A66642374}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{5DF4DE51-376F-430D-BC9D-9103E0764FFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5DF4DE51-376F-430D-BC9D-9103E0764FFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5DF4DE51-376F-430D-BC9D-9103E0764FFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F53D975-F35E-48DF-B6E0-106A66642374}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F53D975-F35E-48DF-B6E0-106A66642374}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F53D975-F35E-48DF-B6E0-106A66642374}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F53D975-F35E-48DF-B6E0-106A66642374}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
