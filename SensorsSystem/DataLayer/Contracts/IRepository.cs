@@ -7,11 +7,15 @@ namespace SensorsSystem.DataLayer.Contracts
 {
     public interface IRepository<T> where T: class
     {
-        Task<T> Get(object id);
+        Task<T> GetById(object id);
 
-        Task Add(T instance);
+        Task<T> Create(T instance);
 
-        Task<T> Remove(object id);
+        Task<T> Delete(object id);
+
+        Task<T> Update(T entity);
+
+        Task<IEnumerable<T>> GetAll();
 
         Task<T> Find(Expression<Func<T, bool>> condition);
 

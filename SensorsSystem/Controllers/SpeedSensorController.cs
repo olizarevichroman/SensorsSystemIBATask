@@ -4,13 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SensorsSystem.DataLayer.Contracts;
 using SensorsSystem.DataLayer.Models;
+using SensorsSystem.Filters;
 using SensorsSystem.Messages;
 
 namespace SensorsSystem.Controllers
 {
     [ApiController]
     [Consumes("application/json")]
-    [Route("[controller]/[action]")]
+    [Route("[controller]")]
     public class SpeedSensorController : ControllerBase
     {
 
@@ -25,9 +26,18 @@ namespace SensorsSystem.Controllers
             _repository = repository;
         }
 
+        [HttpPost]
+        public async Task<SpeedSensorData> Create(SpeedSensorData data)
+        {
+            return await _repository.Create(data);
+        }
+
+        [HttpGet]
+        [ServiceFilter(typeof(RestrictDataSelectionAttribute))]
+        [Route("[action]")]
         public async Task<IEnumerable<SpeedSensorData>> GetCarsWithSpeedViolation([FromBody] GetCarsWithSpeedViolationMessage message)
         {
-            var result = await _repository.FindAll(d => d.Date.Equals(message.Date) && d.Speed > message.SpeedBorder);
+            var result = await _repository.FindAll(d => d.Date.Equals(message.FixingDate) && d.Speed > message.SpeedBorder);
 
             return result;
         }

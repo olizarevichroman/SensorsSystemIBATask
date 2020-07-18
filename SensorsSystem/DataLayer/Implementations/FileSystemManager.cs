@@ -3,6 +3,7 @@ using SensorsSystem.DataLayer.Contracts.FileSystem;
 using System;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace SensorsSystem.DataLayer.Implementations
@@ -17,16 +18,24 @@ namespace SensorsSystem.DataLayer.Implementations
         public FileSystemManager(IFileManager<T> fileManager)
         {
             _fileManager = fileManager;
+            _rootDirectory = Path.Combine(Directory.GetCurrentDirectory(), typeof(T).Name);
 
             var modelName = this.GetType().GetGenericArguments().First().Name;
             EnsureDirectoryCreated(modelName);
         }
 
-        public Task Add(T item)
+        public async Task<T> Add(T item)
         {
-            var filePath = GetLastFilePath();
+            var fileStream = GetLastFileStream(FileAccess.Write);
+            await _fileManager.CreateWriter(fileStream).Write(item);
 
-            return _fileManager.CreateWriter(filePath).Write(item);
+            return item;
+        }
+
+        public Task<T> Find(Expression<Func<T, bool>> expression)
+        {
+            //Mocked data for now
+            return Task.FromResult(new T());
         }
 
         private void EnsureDirectoryCreated(string directoryName)
@@ -39,12 +48,16 @@ namespace SensorsSystem.DataLayer.Implementations
             }
         }
 
-        private string GetLastFilePath()
+        private FileStream GetLastFileStream(FileAccess fileAccess)
         {
             var fileNames = Directory.GetFiles(_rootDirectory);
+            if (fileNames.Length == 0)
+            {
+                return File.Open(Path.Combine(_rootDirectory, $"{Guid.NewGuid().ToString()}.json"), FileMode.Create, fileAccess);
+            }
             Array.Sort(fileNames);
 
-            return fileNames.Last();
+            return File.Open(Path.Combine(_rootDirectory, fileNames.Last()), FileMode.Append, fileAccess);
         }
     }
 }

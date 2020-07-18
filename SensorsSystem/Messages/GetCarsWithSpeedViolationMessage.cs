@@ -4,7 +4,8 @@ namespace SensorsSystem.Messages
 {
     public class GetCarsWithSpeedViolationMessage
     {
-        public DateTime Date { get; set; }
+        public DateTime FixingDate { get; set; }
+
         public double SpeedBorder { get; set; }
     }
 }

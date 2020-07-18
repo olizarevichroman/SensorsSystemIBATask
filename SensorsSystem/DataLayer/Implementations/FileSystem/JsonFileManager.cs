@@ -1,6 +1,6 @@
 ﻿using SensorsSystem.DataLayer.Contracts;
 using SensorsSystem.DataLayer.Contracts.FileSystem;
-using System;
+using SensorsSystem.DataLayer.Implementations.FileSystem.Readers;
 using System.IO;
 
 namespace SensorsSystem.DataLayer.Implementations.FileSystem
@@ -9,12 +9,12 @@ namespace SensorsSystem.DataLayer.Implementations.FileSystem
     {
         public IFileReader<T> CreateReader(Stream stream)
         {
-            throw new NotImplementedException();
+            return new JsonFileReader<T>(stream);
         }
 
         public IFileReader<T> CreateReader(string filePath)
         {
-            throw new NotImplementedException();
+            return new JsonFileReader<T>(filePath);
         }
 
         public IFileWriter<T> CreateWriter(Stream stream)

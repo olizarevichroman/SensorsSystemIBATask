@@ -15,14 +15,19 @@ namespace SensorsSystem.DataLayer.Implementations
             _fileSystemManager = fileSystemManager;
         }
 
-        public Task Add(T item)
+        public Task<T> Create(T item)
         {
             return _fileSystemManager.Add(item);
         }
 
-        public Task<T> Find(Expression<Func<T, bool>> condition)
+        public Task<T> Delete(object id)
         {
             throw new NotImplementedException();
+        }
+
+        public Task<T> Find(Expression<Func<T, bool>> expression)
+        {
+            return _fileSystemManager.Find(expression);
         }
 
         public Task<IEnumerable<T>> FindAll (Expression<Func<T, bool>> condition)
@@ -35,7 +40,22 @@ namespace SensorsSystem.DataLayer.Implementations
             throw new NotImplementedException();
         }
 
+        public Task<IEnumerable<T>> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<T> GetById(object id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<T> Remove(object id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<T> Update(T entity)
         {
             throw new NotImplementedException();
         }
